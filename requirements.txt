@@ -1,11 +1,14 @@
 llama-index
-transformers accelerate bitsandbytes
+transformers 
+accelerate 
+bitsandbytes
 llama-index-readers-web
 llama-index-llms-huggingface
 llama-index-embeddings-huggingface
 llama-index-program-openai
 llama-index-agent-openai
 InstructorEmbedding
-llama-index-vector-stores-qdrant qdrant_client
+llama-index-vector-stores-qdrant 
+qdrant_client
 fastembed
 transformers
