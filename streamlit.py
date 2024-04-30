@@ -26,7 +26,7 @@ def load_db():
   from llama_index.core import Settings
   from InstructorEmbedding import INSTRUCTOR
 
-  Settings.llm = HuggingFaceLLM("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")
+ 
   Settings.embed_model='local:hkunlp/instructor-large'
 
 
