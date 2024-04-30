@@ -5,7 +5,7 @@ from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
 from llama_index.llms.huggingface import HuggingFaceLLM
 
-
+os.environ['OPEN_API_KEY']='sk-proj-PTYD208hILd8asOnPcUHT3BlbkFJoMtbRpY3uZdzGzlM6Yl7'
 def load_model():
  
   llm = HuggingFaceLLM(
