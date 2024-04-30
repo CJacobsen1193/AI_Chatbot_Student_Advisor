@@ -8,7 +8,7 @@ from llama_index.llms.huggingface import HuggingFaceLLM
 
 def load_model():
   from transformers import BitsAndBytesConfig
-  from accelerate import quantization
+  
   
   quantization_config = BitsAndBytesConfig(
     load_in_4bit=True,
