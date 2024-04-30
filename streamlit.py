@@ -27,7 +27,7 @@ def load_db():
   from InstructorEmbedding import INSTRUCTOR
 
  
-  Settings.embed_model='local:hkunlp/instructor-large'
+ 
 
 
   qdrant_client = QdrantClient(
