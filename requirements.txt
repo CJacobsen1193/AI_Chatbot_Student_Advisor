@@ -1,7 +1,7 @@
 llama-index
 transformers 
 accelerate 
-bitsandbytes @ https://pypi.org/simple/bitsandbytes
+bitsandbytes==0.43.1
 llama-index-readers-web
 llama-index-llms-huggingface
 llama-index-embeddings-huggingface
