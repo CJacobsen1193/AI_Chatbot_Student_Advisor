@@ -1,7 +1,6 @@
 llama-index
 transformers 
 accelerate 
-bitsandbytes==0.43.1
 llama-index-readers-web
 llama-index-llms-huggingface
 llama-index-embeddings-huggingface
@@ -13,3 +12,4 @@ qdrant_client
 fastembed
 transformers
 python-dotenv
+-i https://pypi.org/simple/ bitsandbytes
