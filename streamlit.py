@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import torch
 import os
 from transformers import BitsAndBytesConfig
+from transformers import accelerate
 from llama_index.core.prompts import PromptTemplate
 from llama_index.llms.huggingface import HuggingFaceLLM
 
