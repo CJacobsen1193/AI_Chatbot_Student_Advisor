@@ -13,7 +13,7 @@ def load_model():
     tokenizer_name="meta-llama/Llama-2-7b-chat-hf",
     query_wrapper_prompt=PromptTemplate("<s> [INST] {query_str} [/INST] "),
     context_window=2000,
-    model_kwargs={"token":"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"}
+    model_kwargs={"token":"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"},
     tokenizer_kwargs={"token": "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"},
     device_map="auto",
   )
