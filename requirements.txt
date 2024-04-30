@@ -1,6 +1,6 @@
 llama-index
 transformers 
-accelerate
+accelerate==0.29.3
 bitsandbytes==0.43.1
 llama-index-readers-web
 llama-index-llms-huggingface
