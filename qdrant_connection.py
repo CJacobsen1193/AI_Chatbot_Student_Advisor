@@ -9,7 +9,7 @@ os.environ['QDRANT_API_KEY']="ZEUHVnqv9sKXF1gHpY3u1pBKljE26BBoOqA2bkyAXKT7nEhCdq
 class QdrantConnection(ExperimentalBaseConnection[QdrantClient]):
     def _connect(self, **kwargs) -> QdrantClient:
         # Retrieve the connection parameters from st.secrets
-        conn_params = st.secrets["connections"]["qdrant_connection"]
+        conn_params = st.secrets['QDRANT_API_KEY']['QDRANT_HOST']
 
         url = conn_params.get("url")
         api_key = os.getenv('QDRANT_API_KEY')
