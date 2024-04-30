@@ -1,10 +1,13 @@
 import streamlit as st
 from dotenv import load_dotenv
 import torch
+import os
 from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
 from llama_index.llms.huggingface import HuggingFaceLLM
+
 load_dotenv()
+hf_token=os.getenv("hf_token")
 
 def load_model():
   quantization_config = BitsAndBytesConfig(
@@ -24,6 +27,6 @@ def load_model():
     device_map="auto",
   )
 
-  st.write('Hello world!')
+  
 
 load_model()
