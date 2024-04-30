@@ -44,6 +44,7 @@ def load_db():
   index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
 def stMain():
+  from qdrant_client import QdrantClient
   #load_model()
   #load_db()
   qdrant_client = QdrantClient(
