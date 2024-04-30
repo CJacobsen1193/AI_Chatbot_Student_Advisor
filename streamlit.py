@@ -42,7 +42,7 @@ def load_db():
   vector_store = QdrantVectorStore(client=qdrant_client, collection_name="mycollection", enable_hybrid=True)
   index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
-def main():
+def stMain():
   load_model()
   load_db()
 
@@ -75,7 +75,7 @@ def main():
       response = st.write_stream(stream)
     st.session_state.messages.append({"role": "assistant", "content": response})
 
-if__name__=="__main__":
-  main()
+if __name__ == "__main__":
+  stMain()
 
 
