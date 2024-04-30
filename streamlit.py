@@ -29,6 +29,8 @@ def load_db():
   from llama_index.core import Settings
   from InstructorEmbedding import INSTRUCTOR
 
+  llm = HuggingFaceLLM("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")
+
   Settings.llm = llm
   Settings.embed_model='local:hkunlp/instructor-large'
 
@@ -42,7 +44,7 @@ def load_db():
   index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
 def stMain():
-  load_model()
+  #load_model()
   load_db()
 
   st.title("Franklin Virtual Assistant")
