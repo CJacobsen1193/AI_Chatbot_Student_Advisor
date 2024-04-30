@@ -12,3 +12,4 @@ llama-index-vector-stores-qdrant
 qdrant_client
 fastembed
 transformers
+dotenv
