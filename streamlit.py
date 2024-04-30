@@ -30,7 +30,7 @@ def load_db():
   from InstructorEmbedding import INSTRUCTOR
 
   llm = HuggingFaceLLM("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")
-  Settings.llm = "meta-llama/Llama-2-7b-chat-hf"
+  Settings.llm = llm
   Settings.embed_model='local:hkunlp/instructor-large'
 
 
