@@ -50,7 +50,7 @@ def stMain():
   st.title("Franklin Virtual Assistant")
 
   if "huggingface_model" not in st.session_state:
-    st.session_state["huggingface_model"] = llm
+    st.session_state["huggingface_model"] = "meta-llama/Llama-2-7b-chat-hf"
 
   if "messages" not in st.session_state:
     st.session_state.messges = []
