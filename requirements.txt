@@ -17,8 +17,6 @@ llama-index-readers-web==0.1.10
 llama-index-vector-stores-qdrant==0.2.8
 llama-parse==0.4.2
 llamaindex-py-client==0.1.19
-bitsandbytes==0.43.1
-accelerate==0.29.3
 InstructorEmbedding==1.0.1
-transformers==4.40.0
+fastembed
 
