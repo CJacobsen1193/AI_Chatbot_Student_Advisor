@@ -22,8 +22,8 @@ def load_model():
     tokenizer_name="meta-llama/Llama-2-7b-chat-hf",
     query_wrapper_prompt=PromptTemplate("<s> [INST] {query_str} [/INST] "),
     context_window=3900,
-    model_kwargs={"token": hf_token, "quantization_config": quantization_config},
-    tokenizer_kwargs={"token": hf_token},
+    model_kwargs={"token": "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", "quantization_config": quantization_config},
+    tokenizer_kwargs={"token": "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"},
     device_map="auto",
   )
 
