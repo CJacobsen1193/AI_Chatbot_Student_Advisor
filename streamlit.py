@@ -26,7 +26,7 @@ def load_db():
   from llama_index.core import Settings
   from InstructorEmbedding import INSTRUCTOR
 
-  Settings.llm = llm
+  Settings.llm = HuggingFaceLLM("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")
   Settings.embed_model='local:hkunlp/instructor-large'
 
 
@@ -40,7 +40,7 @@ def load_db():
 
 def stMain():
 
-  load_model()
+  #load_model()
   load_db()
   chat_engine = index.as_chat_engine(chat_mode="context",response_mode="compact",max_new_tokens=1024,
                                         system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University")
