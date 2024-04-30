@@ -29,8 +29,8 @@ def load_db():
   from llama_index.core import Settings
   from InstructorEmbedding import INSTRUCTOR
 
-
-  #Settings.embed_model='local:hkunlp/instructor-large'
+  Settings.llm = "meta-llama/Llama-2-7b-chat-hf"
+  Settings.embed_model='local:hkunlp/instructor-large'
 
 
   qdrant_client = QdrantClient(
@@ -42,7 +42,6 @@ def load_db():
   index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
 def stMain():
-  from qdrant_client import QdrantClient
 
   #load_model()
   load_db()
