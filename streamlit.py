@@ -46,7 +46,10 @@ def load_db():
 def stMain():
   #load_model()
   #load_db()
-
+  qdrant_client = QdrantClient(
+    url="https://1d752ae2-4e0f-4101-ae0f-b59cd212e480.us-east4-0.gcp.cloud.qdrant.io",
+    api_key="ZEUHVnqv9sKXF1gHpY3u1pBKljE26BBoOqA2bkyAXKT7nEhCdq_xWA",
+  )
   st.title("Franklin Virtual Assistant")
 
   if "huggingface_model" not in st.session_state:
