@@ -29,9 +29,7 @@ def load_db():
   from llama_index.core import Settings
   from InstructorEmbedding import INSTRUCTOR
 
-  llm = HuggingFaceLLM("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")
 
-  Settings.llm = llm
   Settings.embed_model='local:hkunlp/instructor-large'
 
 
@@ -45,12 +43,13 @@ def load_db():
 
 def stMain():
   from qdrant_client import QdrantClient
+
   #load_model()
-  #load_db()
-  qdrant_client = QdrantClient(
-    url="https://1d752ae2-4e0f-4101-ae0f-b59cd212e480.us-east4-0.gcp.cloud.qdrant.io",
-    api_key="ZEUHVnqv9sKXF1gHpY3u1pBKljE26BBoOqA2bkyAXKT7nEhCdq_xWA",
-  )
+  load_db()
+  chat_engine = index.as_chat_engine(chat_mode="context",response_mode="compact",max_new_tokens=1024,
+                                        system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University")
+                                        )
+  
   st.title("Franklin Virtual Assistant")
 
   if "huggingface_model" not in st.session_state:
@@ -63,13 +62,13 @@ def stMain():
     with st.chat_message(message["role"]):
       st.markdown(message["content"])
 
-  if prompt := st.chat_input("What is up?"):
+  if prompt := st.chat_input("Ask me a question about Franklin University!"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
       st.markdown(prompt)
 
     with st.chat_message("assistant"):
-      stream = qdrant_client.chat.completions.create(
+      stream = chat_engine.chat(
         model=st.session_state["huggingface_model"],
         messages=[
           {"role": m["role"], "content": m["content"]}
