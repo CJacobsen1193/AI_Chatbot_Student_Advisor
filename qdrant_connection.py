@@ -3,8 +3,8 @@ from qdrant_client import QdrantClient
 import streamlit as st
 import os
 
-os.environ['QDRANT_HOST']="https://1d752ae2-4e0f-4101-ae0f-b59cd212e480.us-east4-0.gcp.cloud.qdrant.io"
-os.environ['QDRANT_API_KEY']="ZEUHVnqv9sKXF1gHpY3u1pBKljE26BBoOqA2bkyAXKT7nEhCdq_xWA"
+os.environ['QDRANT_HOST']=''
+os.environ['QDRANT_API_KEY']=''
 
 class QdrantConnection(ExperimentalBaseConnection[QdrantClient]):
     def _connect(self, **kwargs) -> QdrantClient:
