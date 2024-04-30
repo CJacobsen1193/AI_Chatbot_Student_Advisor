@@ -45,7 +45,7 @@ def load_db():
 
 def stMain():
   #load_model()
-  load_db()
+  #load_db()
 
   st.title("Franklin Virtual Assistant")
 
