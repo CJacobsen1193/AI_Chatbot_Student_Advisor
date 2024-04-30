@@ -11,7 +11,7 @@ class QdrantConnection(ExperimentalBaseConnection[QdrantClient]):
         # Retrieve the connection parameters from st.secrets
         conn_params = st.secrets["connections"]["qdrant_connection"]
 
-        url = conn_params.get('QDRANT_HOST')
+        url = conn_params.get('url')
         api_key = os.getenv('QDRANT_API_KEY')
 
         if not url or not api_key:
