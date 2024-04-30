@@ -21,4 +21,4 @@ bitsandbytes==0.43.1
 accelerate==0.29.3
 InstructorEmbedding==1.0.1
 transformers==4.40.0
-fastembed==0.2.6
+
