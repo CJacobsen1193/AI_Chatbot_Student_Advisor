@@ -5,7 +5,7 @@ from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
 from llama_index.llms.huggingface import HuggingFaceLLM
 
-os.environ['OPEN_API_KEY']='sk-proj-PTYD208hILd8asOnPcUHT3BlbkFJoMtbRpY3uZdzGzlM6Yl7'
+
 def load_model():
  
   llm = HuggingFaceLLM(
@@ -26,10 +26,9 @@ def load_db():
   from llama_index.core import Settings
   from InstructorEmbedding import INSTRUCTOR
 
+  Settings.llm = llm
+  Settings.embed_model='local:hkunlp/instructor-large'
  
- 
-
-
   qdrant_client = QdrantClient(
     url="https://1d752ae2-4e0f-4101-ae0f-b59cd212e480.us-east4-0.gcp.cloud.qdrant.io",
     api_key="ZEUHVnqv9sKXF1gHpY3u1pBKljE26BBoOqA2bkyAXKT7nEhCdq_xWA",
