@@ -4,11 +4,11 @@ from langchain.vectorstores import Qdrant
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains import RetrievalQA
-from llama_index.llms.huggingface import HuggingFaceLLM
+from langchain.llms import OpenAI
 from qdrant_client import http
 from qdrant_openapi_client.exceptions import UnexpectedResponse
-from InstructorEmbedding import INSTRUCTOR
 import os
+
 
 def main():
     with st.sidebar:
@@ -42,21 +42,21 @@ def main():
                 st.info("Please enter a valid API Key to access Qdrant", icon="🗝️")
 
         with tab2:
-            st.subheader("Huggingface API 🗝️")
-            huggingface_api = st.text_input("Please enter your Huggingface Api Key: ", type="password")
-            if huggingface_api:
+            st.subheader("Open AI API 🗝️")
+            open_ai_api = st.text_input("Please enter your Open AI Api Key: ", type="password")
+            if open_ai_api:
                 try:
-                    os.environ['HF_API_KEY'] = huggingface_api
-                    placeholder_huggingface_key = st.empty()
-                    placeholder_huggingface_key.image(
+                    os.environ['OPENAI_API_KEY'] = open_ai_api
+                    placeholder_openai_key = st.empty()
+                    placeholder_openai_key.image(
                         "https://media2.giphy.com/media/BpGWitbFZflfSUYuZ9/giphy.gif?cid=ecf05e471yrng589z3czqyc6994yahj5l2nyn6km3snkl5t0&ep=v1_gifs_search&rid=giphy.gif&ct=g")
                     time.sleep(5)
-                    placeholder_huggingface_key.empty()
+                    placeholder_openai_key.empty()
                 except:
-                    st.warning("Hmmm something went wrong 🤔 Please check you entered a valid Huggingface API Key",
+                    st.warning("Hmmm something went wrong 🤔 Please check you entered a valid Open AI API Key",
                                icon="🔐")
             else:
-                st.info("🗝️ Please enter a valid API Key to access Huggingface chat features")
+                st.info("🗝️ Please enter a valid API Key to access Open AI chat features")
 
         with tab3:
             st.subheader("Qdrant Collections")
@@ -108,16 +108,16 @@ def main():
                     qdrant_client.delete_collection(collection_name=f"{collection_to_delete}")
                     st.success(f"Collection '{collection_to_delete}' has been deleted!", icon="💨")
 
-    st.header("Ask us about Franklin University!")
+    st.header("Query a Document using Qdrant and Open AI")
 
-    if huggingface_api:
+    if open_ai_api:
         try:
-            os.environ['HF_KEY'] = huggingface_api
+            os.environ['OPENAI_API_KEY'] = open_ai_api
             collections = qdrant_client.get_collections().dict()["collections"]
             collection_to_store = st.selectbox(
                 label="Please choose a collection to store the text you wish to query:",
                 options=[i['name'] for i in collections])
-            embeddings = InstructorEmbedding()
+            embeddings = OpenAIEmbeddings()
 
             vector_store = Qdrant(
                 client=qdrant_client,
@@ -144,7 +144,7 @@ def main():
             # Plug Vector store into retrieval chain
 
             qa = RetrievalQA.from_chain_type(
-                llm=HuggingFaceLLM(),
+                llm=OpenAI(),
                 chain_type='stuff',
                 retriever=vector_store.as_retriever()
             )
@@ -161,9 +161,9 @@ def main():
                 with st.chat_message("assistant"):
                     st.write(response)
         except:
-            st.warning("Hmmm something went wrong 🤔 Please check you entered a valid Huggingface API Key", icon="🔐")
+            st.warning("Hmmm something went wrong 🤔 Please check you entered a valid Open AI API Key", icon="🔐")
     else:
-        st.info("👈 Please enter a valid Huggingface API Key to access chat features")
+        st.info("👈 Please enter a valid Open AI API Key to access Open AI chat features")
         placeholder_query_document = st.empty()
         placeholder_query_document.image(
             "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXB2YWNndGJrNTZhMmN0MXBzdmRhMGo3eDcwOTE4aGE4emtibDQ5eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/k7LvfbDPWR0Uxcqm6f/giphy.gif")
@@ -173,8 +173,3 @@ def main():
 
 if __name__ == "__main__":
     main()
- 
-
-      
-    
- 
