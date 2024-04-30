@@ -1,6 +1,6 @@
-llama_index
-transformers
-accelerate
+llama-index
+transformers 
+accelerate 
 bitsandbytes
 llama-index-readers-web
 llama-index-llms-huggingface
@@ -11,3 +11,4 @@ InstructorEmbedding
 llama-index-vector-stores-qdrant
 qdrant_client
 fastembed
+transformers
