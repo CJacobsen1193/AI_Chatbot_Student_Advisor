@@ -6,7 +6,7 @@ from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
 from llama_index.llms.huggingface import HuggingFaceLLM
 
-%pip install -i https://pypi.org/simple/ bitsandbytes
+!pip install -i https://pypi.org/simple/ bitsandbytes
 
 def load_model():
   quantization_config = BitsAndBytesConfig(
