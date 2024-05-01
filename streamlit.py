@@ -59,16 +59,10 @@ def stMain():
       st.markdown(prompt)
 
     with st.chat_message("assistant"):
-      stream = client.chat.completions.create(
-        model=st.session_state["huggingface_model"],
-        messages=[
-          {"role": m["role"], "content": m["content"]}
-          for m in st.session_state.messages
-        ],
-        stream=True,
-      )
-      response = chat_engine.chat(stream)
-    st.session_state.messages.append({"role": "assistant", "content": response})
+      prompt = str(input("Ask me a question about Franklin University!  "))
+      response = st.write_stream(chat_engine.chat(prompt))
+      st.session_state.messages.append({"role": "assistant", "content": response})
+      
 
 if __name__ == "__main__":
   stMain()
