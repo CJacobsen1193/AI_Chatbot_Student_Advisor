@@ -14,8 +14,10 @@ from InstructorEmbedding import INSTRUCTOR
 
 def stMain():
 
-  open_api_key = "sk-proj-JbT2fOaShXli4PGSCAmFT3BlbkFJ6LWbRamHlQT8Zx8iR6Rx" 
+  open_api_key = ""
   os.environ['OPENAI_API_KEY'] = open_api_key 
+
+  Settings.embed_model = 'local:hkunlp/instructor-large'
 
   qdrant_client = QdrantClient(
       url="https://097d6aff-312a-41fe-90e7-90219bf4a194.us-east4-0.gcp.cloud.qdrant.io",
@@ -30,51 +32,72 @@ def stMain():
                                         )
   
   st.title("Franklin Virtual Assistant")
+  new_session = False
+  end_chat = False
+  new_session = st.sidebar.checkbox("Reset Chat History")
+  end_chat = st.sidebar.checkbox("Exit Chat")
 
-  #initialize chat history
-  if "messages" not in st.session_state:
-    st.session_state.messages=[]
+  count = 0
 
-  for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-      st.markdown(message["content"])
+  while not end_chat:
+    count+=1
 
-  #request prompt from user
-  prompt = None
-  st_message = st.chat_message("user")
-  prompt = st_message.chat_input("Ask me a question about Franklin University")
-  more = True
+    #initialize chat history
+    if "messages" not in st.session_state:
+      st.session_state.messages=[]
 
-  #wait for prompt from user
-  with st.sidebar.status("Thinking..."):
-    while more == True:
-      if (prompt is None or len(prompt) <= 0):
-        more = True
-      else:
-        more = False
-  
-  #write prompt on chat window
-  if prompt is not None or len(prompt) > 0:
-    prompt = str(prompt)
-    st.session_state.messages.append(
-      {"role": "user", "content": prompt}
-    )
-    with st.chat_message("user"):
-      st.markdown(prompt)
+    for message in st.session_state.messages:
+      with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-  #display response in chat message container
-  response = None
-  with st.sidebar.status("Finding answers..."):
-    response = chat_engine.chat(prompt)
-  if response is not None or len(response) > 0:
-    response = str(response)
-    if prompt and response:
-      st_message = st.chat_message("assistant")
-      st_message.write(response.response)
+    #request prompt from user
+    prompt = None
+    st_message = st.chat_message("user")
+    prompt = st_message.chat_input("Ask me a question about Franklin University")
+    more = True
+
+    #wait for prompt from user
+    with st.sidebar.status("Thinking..."):
+      while more:
+        if (prompt is None or len(prompt) <= 0):
+          more = True
+        else:
+          more = False
+    
+    #write prompt on chat window
+    if prompt is not None or len(prompt) > 0:
+      prompt = str(prompt)
       st.session_state.messages.append(
-        {"role" : "assistant",
-        "content": response.response}
+        {"role": "user", "content": prompt}
       )
+      with st.chat_message("user"):
+        st.markdown(prompt)
+
+    #display response in chat message container
+    response = None
+    with st.sidebar.status("Finding answers..."):
+      response = chat_engine.chat(prompt)
+    if response is not None or len(response) > 0:
+      if prompt and response:
+        st_message = st.chat_message("assistant")
+        st_message.write(response.response)
+      st.session_state.messages.append(
+        {"role": "assistant", 
+        "content": response}
+      )
+
+    if new_session:
+      chat_engine.reset()
+      new_session = False
+    
+    st.stop()
+    st.rerun()
+    st.title("Franklin Virtual Assistant")
+    new_session=False
+    end_chat=False
+    new_session=st.sidebar.checkbox("Reset Chat History")
+    end_chat=st.sidebar.checkbox("Exit Chat")
+  st.stop()
 
 
 if __name__ == "__main__":
