@@ -40,6 +40,8 @@ def stMain():
   
    st.title("Franklin Virtual Assistant")
 
+   client = HuggingFaceLLM(api_key="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")
+
 
    if "huggingface_model" not in st.session_state:
     st.session_state["huggingface_model"] = "meta-llama/Llama-2-7b-chat-hf"
