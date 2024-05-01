@@ -39,7 +39,7 @@ def load_db():
 
 def stMain():
 
-  #load_model()
+  load_model()
   load_db()
   chat_engine = index.as_chat_engine(chat_mode="context",response_mode="compact",max_new_tokens=1024,
                                         system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University")
