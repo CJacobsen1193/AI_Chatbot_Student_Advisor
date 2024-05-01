@@ -4,6 +4,12 @@ import os
 from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
 from llama_index.llms.huggingface import HuggingFaceLLM
+from llama_index.core import VectorStoreIndex
+from llama_index.vector_stores.qdrant import QdrantVectorStore
+import qdrant_client
+from qdrant_client import QdrantClient
+from llama_index.core import Settings
+from InstructorEmbedding import INSTRUCTOR
 
 
 def stMain():
@@ -16,13 +22,6 @@ def stMain():
     tokenizer_kwargs={"token": "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"},
     device_map="auto",
   )
-
-   from llama_index.core import VectorStoreIndex
-   from llama_index.vector_stores.qdrant import QdrantVectorStore
-   import qdrant_client
-   from qdrant_client import QdrantClient
-   from llama_index.core import Settings
-   from InstructorEmbedding import INSTRUCTOR
 
    Settings.llm = llm
    Settings.embed_model='local:hkunlp/instructor-large'
