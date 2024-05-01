@@ -59,7 +59,7 @@ def stMain():
       st.markdown(prompt)
 
     with st.chat_message("assistant"):
-      stream = llm.chat.completions.create(
+      stream = client.chat.completions.create(
         model=st.session_state["huggingface_model"],
         messages=[
           {"role": m["role"], "content": m["content"]}
