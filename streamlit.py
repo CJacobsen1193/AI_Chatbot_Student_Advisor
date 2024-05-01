@@ -58,7 +58,7 @@ def stMain():
 
     with st.chat_message("assistant"):
       prompt = str(input("Ask me a question about Franklin University!  "))
-      response = st.write_stream(chat_engine.chat(prompt))
+      response = chat_engine.chat(prompt)
       st.session_state.messages.append({"role": "assistant", "content": response})
       
 
