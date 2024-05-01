@@ -6,9 +6,8 @@ from llama_index.core.prompts import PromptTemplate
 from llama_index.llms.huggingface import HuggingFaceLLM
 
 
-def load_model():
- 
-  llm = HuggingFaceLLM(
+def stMain():
+   llm = HuggingFaceLLM(
     model_name="meta-llama/Llama-2-7b-chat-hf",
     tokenizer_name="meta-llama/Llama-2-7b-chat-hf",
     query_wrapper_prompt=PromptTemplate("<s> [INST] {query_str} [/INST] "),
@@ -36,9 +35,6 @@ def load_model():
   vector_store = QdrantVectorStore(client=qdrant_client, collection_name="mycollection", enable_hybrid=True)
   index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
-def stMain():
-
-  load_model()
   chat_engine = index.as_chat_engine(chat_mode="context",response_mode="compact",max_new_tokens=1024,
                                         system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University")
                                         )
