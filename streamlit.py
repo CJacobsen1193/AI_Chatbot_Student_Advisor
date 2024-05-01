@@ -40,6 +40,7 @@ def stMain():
   
    st.title("Franklin Virtual Assistant")
 
+
    if "huggingface_model" not in st.session_state:
     st.session_state["huggingface_model"] = "meta-llama/Llama-2-7b-chat-hf"
 
@@ -56,7 +57,7 @@ def stMain():
       st.markdown(prompt)
 
     with st.chat_message("assistant"):
-      stream = chat_engine.chat(
+      stream = llm.chat.completions.create(
         model=st.session_state["huggingface_model"],
         messages=[
           {"role": m["role"], "content": m["content"]}
@@ -64,7 +65,7 @@ def stMain():
         ],
         stream=True,
       )
-      response = st.write_stream(stream)
+      response = chat_engine.chat(stream)
     st.session_state.messages.append({"role": "assistant", "content": response})
 
 if __name__ == "__main__":
