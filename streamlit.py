@@ -45,31 +45,34 @@ def stMain():
         st.markdown(message["content"])
 
     #request prompt from user
-    prompt = None
-    st_message = st.chat_message("user")
-    prompt = st_message.chat_input("Ask me a question about Franklin University")
+    if count == 1:
+      prompt = None
+      st_message = st.chat_message("user")
+      prompt = st_message.chat_input("Ask me a question about Franklin University")
       
 
     
     #write prompt on chat window
     if prompt is not None:
       prompt = prompt
+      with st.chat_message("user"):
+        st.markdown(prompt)
       st.session_state.messages.append(
         {"role": "user", "content": prompt}
       )
-      with st.chat_message("user"):
-        st.markdown(prompt)
 
     #display response in chat message container
     response = chat_engine.chat(str(prompt))
     if response is not None or len(response) > 0:
       if prompt and response:
-        st_message = st.chat_message("assistant")
-        st_message.write(response.response)
-      st.session_state.messages.append(
+        with st.chat_message("assistant"):
+          st.markdown(response)
+        st.session_state.messages.append(
         {"role": "assistant", 
-        "content": response}
+        "content": response.response}
       )
+        
+      
 
     
     st.stop()
