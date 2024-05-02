@@ -29,10 +29,7 @@ def stMain():
                                         )
   
   st.title("Franklin Virtual Assistant")
-  new_session = False
   end_chat = False
-  new_session = st.sidebar.checkbox("Reset Chat History")
-  end_chat = st.sidebar.checkbox("Exit Chat")
 
   count = 0
 
@@ -51,19 +48,12 @@ def stMain():
     prompt = None
     st_message = st.chat_message("user")
     prompt = st_message.chat_input("Ask me a question about Franklin University")
-    more = True
+      
 
-    #wait for prompt from user
-    with st.sidebar.status("Thinking..."):
-      while more:
-        if (prompt is None or len(prompt) <= 0):
-          more = True
-        else:
-          more = False
     
     #write prompt on chat window
-    if prompt is not None or len(prompt) > 0:
-      prompt = str(prompt)
+    if prompt is not None:
+      prompt = prompt
       st.session_state.messages.append(
         {"role": "user", "content": prompt}
       )
@@ -71,9 +61,7 @@ def stMain():
         st.markdown(prompt)
 
     #display response in chat message container
-    response = None
-    with st.sidebar.status("Finding answers..."):
-      response = chat_engine.chat(prompt)
+    response = chat_engine.chat(str(prompt))
     if response is not None or len(response) > 0:
       if prompt and response:
         st_message = st.chat_message("assistant")
@@ -83,17 +71,11 @@ def stMain():
         "content": response}
       )
 
-    if new_session:
-      chat_engine.reset()
-      new_session = False
     
     st.stop()
     st.rerun()
     st.title("Franklin Virtual Assistant")
-    new_session=False
-    end_chat=False
-    new_session=st.sidebar.checkbox("Reset Chat History")
-    end_chat=st.sidebar.checkbox("Exit Chat")
+    prompt = st_message.chat_input("Ask me a question about Franklin University")
   st.stop()
 
 
