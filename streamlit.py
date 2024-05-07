@@ -28,58 +28,26 @@ def stMain():
                                         system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University")
                                         )
   
-  st.title("Franklin Virtual Assistant")
-  end_chat = False
-
-  count = 0
-
-  while not end_chat:
-    count+=1
+  st.title("Virtual Student Advisor for Franklin University")
 
     #initialize chat history
-    if "messages" not in st.session_state:
+  if "messages" not in st.session_state:
       st.session_state.messages=[]
 
-    for message in st.session_state.messages:
+  for message in st.session_state.messages:
       with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
     #request prompt from user
-    if count == 1:
-      prompt = None
-      st_message = st.chat_message("user")
-      prompt = st_message.chat_input("Ask me a question about Franklin University")
-      
+  if prompt := st.chat_input("Ask me about Franklin University!"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+      st.markdown(prompt)
+    with st.chat_message("assistant"):
+      response = chat_engine.chat(str(prompt))
+      st.markdown(response.response)
+    st.session_state.messages.append({"role": "assistant", "content": response.response}) 
 
-    
-    #write prompt on chat window
-    if prompt is not None:
-      prompt = prompt
-      with st.chat_message("user"):
-        st.markdown(prompt)
-      st.session_state.messages.append(
-        {"role": "user", "content": prompt}
-      )
-
-    #display response in chat message container
-    response = chat_engine.chat(str(prompt))
-    if response is not None or len(response) > 0:
-      if prompt and response:
-        with st.chat_message("assistant"):
-          st.markdown(response)
-        st.session_state.messages.append(
-        {"role": "assistant", 
-        "content": response.response}
-      )
-        
-      
-
-    
-    st.stop()
-    st.rerun()
-    st.title("Franklin Virtual Assistant")
-    prompt = st_message.chat_input("Ask me a question about Franklin University")
-  st.stop()
 
 
 if __name__ == "__main__":
