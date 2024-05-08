@@ -25,7 +25,7 @@ def stMain():
   index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
 
   chat_engine = index.as_chat_engine(chat_mode="context",response_mode="compact",max_new_tokens=1024,
-                                        system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University")
+                                        system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University using only the context provided")
                                         )
   
   st.title("Virtual Student Advisor for Franklin University")
