@@ -28,7 +28,7 @@ def stMain():
                                         system_prompt=("You are a chatbot, able to have normal interactions, as well as talk about Franklin University using only the context provided")
                                         )
   
-  st.title("Virtual Student Advisor for Franklin University")
+  st.title("Team 3 Virtual Advisor: AI from US")
 
     #initialize chat history
   if "messages" not in st.session_state:
