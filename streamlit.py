@@ -11,7 +11,7 @@ from InstructorEmbedding import INSTRUCTOR
 
 def stMain():
 
-  open_api_key = "sk-proj-jXZ8VloE0QNBa8f7DZxmT3BlbkFJg3AmdEX8A1PKzVq0s8ic"
+  open_api_key = '****'
   os.environ['OPENAI_API_KEY'] = open_api_key 
 
   Settings.embed_model = 'local:hkunlp/instructor-large'
